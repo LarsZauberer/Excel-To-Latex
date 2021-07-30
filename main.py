@@ -11,8 +11,10 @@ import argparse
 
 
 parser = argparse.ArgumentParser()
+parser.version = "1.0.0"
 parser.add_argument("-f", help="Specify your excel spreadsheed", action="store")
 parser.add_argument("-v", help="Verbose", action="store_true", default=False)
+parser.add_argument("--version", help="Version", action="version")
 
 args = parser.parse_args()
 
