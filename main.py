@@ -100,3 +100,27 @@ with doc.create(LongTable(form)) as data_table:
 
 log.debug(f"Creating File")
 doc.generate_pdf("file", clean_tex=False)
+
+try:
+    import pyperclip as pc
+except ModuleNotFoundError:
+    log.warning(f"No pyperclip installed. Cannot copy latex code to clipboard")
+    sys.exit(0)
+
+
+log.debug(f"Trying to copy latex code to clipboard")
+with open("file.tex", "r") as f:
+    inTable = False
+    data = []
+    for i in f.readlines():
+        if r"\begin{longtable}" in i:
+            inTable = True
+        elif r"\end{longtable}" in i:
+            inTable = False
+            
+        if inTable:
+            data.append(i)
+            
+pc.copy("".join(data))
+
+log.info(f"Successfully copied latex code to clipboard.")
