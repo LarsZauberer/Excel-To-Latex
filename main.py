@@ -67,10 +67,6 @@ for i in keys:
 form.strip()
 log.debug(f"Form: {form}")
 
-""" for _, row in data.iterrows():
-    for i in row:
-        print(i) """
-
 with doc.create(LongTable(form)) as data_table:
     # Code from https://jeltef.github.io/PyLaTeX/current/examples/longtable.html
     data_table.add_hline()
@@ -91,11 +87,14 @@ with doc.create(LongTable(form)) as data_table:
     
     log.debug(f"Finished creating structure of the table")
     
-    for _, row in track(data.iterrows(), total=data.shape[0], description="Adding Data"):
-        d = []
-        for i in row:
-            d.append(i)
-        data_table.add_row(d)
+    try:
+        for _, row in track(data.iterrows(), total=data.shape[0], description="Adding Data"):
+            d = []
+            for i in row:
+                d.append(i)
+            data_table.add_row(d)
+    except Exception:
+        log.exception(f"Error while adding Data")
     
     log.info(f"Successfully added data")
 
