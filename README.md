@@ -2,7 +2,7 @@
 ## Converts an excel file to an latex table and copies the code to the clipboard.
 
 # Installation from source
-1. Clone the repository or download the `.zip` file [here]()
+1. Clone the repository or download the `.zip` file [here](https://github.com/LarsZauberer/Excel-To-Latex/releases)
 2. Run the command in side the folder: 
 ```
 pip install -r requirements.txt
